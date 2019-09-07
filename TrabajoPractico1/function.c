@@ -4,19 +4,8 @@
 void menu()
 {
 
-    float x=0;
-    float y=0;
-    int option;
-    float suma=0;
-    float resta;
-    float multiplicacion;
-    float divicion;
-    int factorialA;
-    int factorialB;
-
-    int flag=0;
-    int flag1=0;
-    int flag2=0;
+    float x=0,y=0,suma=0,resta,multiplicacion,divicion;
+    int factorialA,factorialB,flag=0,flag1=0,flag2=0,option;
 
     do
     {
