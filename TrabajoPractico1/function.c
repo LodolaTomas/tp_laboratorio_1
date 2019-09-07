@@ -34,10 +34,12 @@ void menu()
         {
 
         case 1:
+            flag2=0;
             PedirNumero(&x);
             flag=1;
             break;
         case 2:
+            flag2=0;
             PedirNumero(&y);
             flag1=1;
             break;
@@ -45,6 +47,7 @@ void menu()
             if(flag1!=1 && flag!=1)
             {
                 printf("\nERROR. DEBE INGRESAR LOS DOS NUMERO ANTES DE CALCULAR ALGO..\n");
+                pausa();
             }
             else
             {
@@ -58,6 +61,7 @@ void menu()
             if(flag1!=1 && flag!=1)
             {
                 printf("\nERROR. DEBE INGRESAR LOS DOS NUMERO ANTES DE MOSTRAR ALGO..\n");
+                pausa();
             }
             else if(flag2==1)
             {
@@ -68,14 +72,17 @@ void menu()
             else
             {
                 printf("\nERROR. DEBE CALCULAR LOS NUMEROS ANTES DE PODER MOSTRARLOS..\n");
+                pausa();
             }
 
             break;
         case 5:
-            printf("\nHASTA LUEGO..\n");
+            printf("\nHASTA LUEGO..");
             break;
         default:
+            borrar();
             printf("ERROR. Elija una opcion del 1-5\n");
+            pausa();
             break;
 
         }
