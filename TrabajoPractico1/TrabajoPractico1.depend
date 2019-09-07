@@ -1,8 +1,19 @@
 # depslib dependency file v1.0
-1567799341 source:/home/tomas/tp_laboratorio_1/TrabajoPractico1/main.c
+1567818653 source:/home/tomas/tp_laboratorio_1/TrabajoPractico1/main.c
 	<stdio.h>
 	<stdlib.h>
 	"functions.h"
 
-1567799704 /home/tomas/tp_laboratorio_1/TrabajoPractico1/functions.h
+1567818652 /home/tomas/tp_laboratorio_1/TrabajoPractico1/functions.h
+	<stdio.h>
+	<stdlib.h>
+
+1567818659 source:/home/tomas/tp_laboratorio_1/TrabajoPractico1/function.c
+	"functions.h"
+	"mathematicalOperations.h"
+
+1567818653 /home/tomas/tp_laboratorio_1/TrabajoPractico1/mathematicalOperations.h
+
+1567818679 source:/home/tomas/tp_laboratorio_1/TrabajoPractico1/mathematicalOperations.c
+	"mathematicalOperations.h"
 
