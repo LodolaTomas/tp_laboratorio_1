@@ -131,7 +131,7 @@ int addEmployee(eEmployee* listE, int lenEmployee, eSector* listS, int lenSector
             auxEmployee.id=idAux;
             getValidString("Ingrese nombre: ","Cuidado, solo letras",0,30,auxEmployee.name);
             getValidString("Ingrese apellido: ","Cuidado, solo letras",0,30,auxEmployee.lastName);
-            getValidFloat("Ingrese salario: ","Cuidado, solo numeros",0,10000,&auxEmployee.salary);
+            getValidFloat("Ingrese salario: ","Cuidado, solo numeros",0,100000000,&auxEmployee.salary);
             mostrar_Sectores(listS,lenSector);
             getValidInt("Ingrese sector: ","Cuidado, solo numeros",0,lenSector,&auxEmployee.sector);
             i=findSectorbyID(listS,lenSector,auxEmployee.sector);
@@ -166,33 +166,38 @@ int removeEmployee(eEmployee* listE, int lenEmployee,eSector* listS, int lenSect
     int indice;
     int indice2;
     int respuesta;
+    int empleados;
     eEmployee auxEmployee;
     eSector auxSector;
 
-    printf("%20s","BAJA EMPLEADO\n");
-    printEmployees(listE,lenEmployee,listS,lenSector);
-    getValidInt("Elija el Empleado a dar de baja: ","Cuidado, solo numeros",0,lenEmployee,&indice);
-    respuesta=findEmployeeById(listE,lenEmployee,indice);
-    if(respuesta!=-1)
+    empleados=cantidadEmpleados(listE,lenEmployee);
+    if(listE!=NULL && lenEmployee!=0 && empleados!=0)
     {
-        auxEmployee=listE[respuesta];
-        indice2=findSectorbyID(listS,lenSector,auxEmployee.sector);
-        auxSector=listS[indice2];
-        borrar();
-        mostrar("BAJA EMPLEADO",auxEmployee,auxSector);
-        if(verifyConformity("Esta seguro que quiere darlo de baja?[Si/No]","Cudiado, responda[Si/No]")==1)
-        {
-            retorno=0;
-            auxEmployee.isEmpty=TRUE;
-            listE[respuesta]=auxEmployee;
-        }
-        else
-        {
-            retorno=1;
-        }
 
+        printf("%20s","BAJA EMPLEADO\n");
+        printEmployees(listE,lenEmployee,listS,lenSector);
+        getValidInt("Elija el Empleado a dar de baja: ","Cuidado, solo numeros",0,lenEmployee,&indice);
+        respuesta=findEmployeeById(listE,lenEmployee,indice);
+        if(respuesta!=-1)
+        {
+            auxEmployee=listE[respuesta];
+            indice2=findSectorbyID(listS,lenSector,auxEmployee.sector);
+            auxSector=listS[indice2];
+            borrar();
+            mostrar("BAJA EMPLEADO",auxEmployee,auxSector);
+            if(verifyConformity("Esta seguro que quiere darlo de baja?[Si/No]","Cudiado, responda[Si/No]")==1)
+            {
+                retorno=0;
+                auxEmployee.isEmpty=TRUE;
+                listE[respuesta]=auxEmployee;
+            }
+            else
+            {
+                retorno=1;
+            }
+
+        }
     }
-
     return retorno;
 }
 
@@ -204,11 +209,13 @@ int modifyEmployees(eEmployee* listE, int lenEmployee,eSector* listS,int lenSect
     int respuesta;
     int answer;
     int index;
+    int empleados;
 
     eEmployee auxEmployee;
     eSector auxSector;
+    empleados=cantidadEmpleados(listE,lenEmployee);
 
-    if(listE!=NULL && lenEmployee!=0)
+    if(listE!=NULL && lenEmployee!=0 && empleados!=0)
     {
         borrar();
         printEmployees(listE,lenEmployee,listS,lenSector);
@@ -225,7 +232,7 @@ int modifyEmployees(eEmployee* listE, int lenEmployee,eSector* listS,int lenSect
                 auxSector=listS[index];
                 borrar();
                 mostrar("MODIFICAR",auxEmployee,auxSector);
-                getValidInt("1- Nombre\n2- Apellido\n3- Salario\n4- Sector\n5-Volver al menu\nEliga una opcion: ","Cuidado, solo ingrese numeros",1,5,&answer);
+                getValidInt("1- Nombre\n2- Apellido\n3- Salario\n4- Sector\n5- Volver al menu\nEliga una opcion: ","Cuidado, solo ingrese numeros",1,5,&answer);
 
                 switch(answer)
                 {
@@ -240,7 +247,7 @@ int modifyEmployees(eEmployee* listE, int lenEmployee,eSector* listS,int lenSect
                     break;
                 case 3:
                     borrar();
-                    getValidFloat("Ingrese nuevo salario: ","Cuidado, Solo Numeros",0,1000000,&auxEmployee.salary);
+                    getValidFloat("Ingrese nuevo salario: ","Cuidado, Solo Numeros",0,100000000,&auxEmployee.salary);
                     break;
                 case 4:
                     borrar();
@@ -272,141 +279,130 @@ int modifyEmployees(eEmployee* listE, int lenEmployee,eSector* listS,int lenSect
     return retorno;
 }
 
-void infoEmployees(eEmployee* listE, int lenEmployee,eSector* listS,int lenSector)
+int infoEmployees(eEmployee* listE, int lenEmployee,eSector* listS,int lenSector)
 {
     int opcion;
     int orden;
-    int respuesta;
-    do
+    int retorno=-1;
+    int empleados;
+
+    empleados=cantidadEmpleados(listE,lenEmployee);
+
+    if(listE!=NULL && lenEmployee!=0 && empleados!=0)
     {
-        printf("%10s\n","INFORMAR");
-        getValidInt("1- Listado de los empleados ordenados alfabéticamente por Apellido y Sector\n2-Total y promedio de los salarios, y cuántos empleados superan el salario promedio\n3- Volver al menu\nElija una opcion: ","Cuidado, Solo numeros",1,3,&opcion);
-        switch(opcion)
+        retorno=0;
+        do
         {
-
-        case 1:
-            borrar();
-            getValidInt("1- Mayor a menor\n2- Menor a mayor\nElija una respuesta: ","Cuidado, solo numeros",1,2,&orden);
-            respuesta=sortEmployees(listE,lenEmployee,orden);
-            if(respuesta!=-1)
+            printf("%10s\n","INFORMAR");
+            getValidInt("1- Listado de los empleados ordenados alfabéticamente por Apellido y Sector\n2-Total y promedio de los salarios, y cuántos empleados superan el salario promedio\n3- Volver al menu\nElija una opcion: ","Cuidado, Solo numeros",1,3,&opcion);
+            switch(opcion)
             {
+
+            case 1:
+                borrar();
+                getValidInt("1- Decedente\n2- Acendente\nElija una respuesta: ","Cuidado, solo numeros",1,2,&orden);
+                sortEmployees(listE,lenEmployee,orden);
                 printEmployees(listE,lenEmployee,listS,lenSector);
+                pausa();
+                break;
+            case 2:
+                borrar();
+                salarioEmpleados(listE,lenEmployee,listS,lenSector);
+                pausa();
+                break;
+            case 3:
+                printf("bye bye\n");
+                break;
             }
-            else{
-                printf("Error. Invalid length or NULL pointer\n");
-            }
-
-            pausa();
-            break;
-        case 2:
             borrar();
-            respuesta=salarioEmpleados(listE,lenEmployee,listS,lenSector);
-            if(respuesta==-1)
-            {
-                printf("Error. Invalid length or NULL pointer\n");
-            }
-            pausa();
-            break;
-        case 3:
-            printf("bye bye\n");
-            break;
         }
-        borrar();
+        while(opcion!=3);
     }
-    while(opcion!=3);
 
-
+    return retorno;
 }
-int sortEmployees(eEmployee* listE, int lenE, int order)
+void sortEmployees(eEmployee* listE, int lenE, int order)
 {
     int i;
     int j;
-    int retorno=-1;
     eEmployee auxEmpleado;
-if(listE!=NULL && lenE!=0)
-{
-    retorno=0;
+
+
     for(i=0; i<lenE-1; i++)
     {
         for(j=i+1; j<lenE; j++)
         {
             if(order==1)
             {
-                        if(strcmp(listE[i].lastName,listE[j].lastName)>0)
+                if(strcmp(listE[i].lastName,listE[j].lastName)>0)
+                {
+                    auxEmpleado = listE[i];
+                    listE[i] = listE[j];
+                    listE[j] = auxEmpleado;
+                }
+
+                else
+                {
+                    if(strcmp(listE[i].lastName,listE[j].lastName)==0)
+                    {
+                        if(listE[i].sector>listE[j].sector)
                         {
                             auxEmpleado = listE[i];
                             listE[i] = listE[j];
                             listE[j] = auxEmpleado;
-                        }
 
-                        else
-                        {
-                            if(strcmp(listE[i].lastName,listE[j].lastName)==0)
-                            {
-                                if(listE[i].sector>listE[j].sector)
-                                {
-                                    auxEmpleado = listE[i];
-                                    listE[i] = listE[j];
-                                    listE[j] = auxEmpleado;
-
-                                }
-                            }
                         }
+                    }
+                }
             }
             if(order==2)
             {
-                        if(strcmp(listE[i].lastName,listE[j].lastName)<0)
+                if(strcmp(listE[i].lastName,listE[j].lastName)<0)
+                {
+                    auxEmpleado = listE[i];
+                    listE[i] = listE[j];
+                    listE[j] = auxEmpleado;
+                }
+
+                else
+                {
+                    if(strcmp(listE[i].lastName,listE[j].lastName)==0)
+                    {
+                        if(listE[i].sector<listE[j].sector)
                         {
                             auxEmpleado = listE[i];
                             listE[i] = listE[j];
                             listE[j] = auxEmpleado;
                         }
-
-                        else
-                        {
-                            if(strcmp(listE[i].lastName,listE[j].lastName)==0)
-                            {
-                                if(listE[i].sector<listE[j].sector)
-                                {
-                                    auxEmpleado = listE[i];
-                                    listE[i] = listE[j];
-                                    listE[j] = auxEmpleado;
-                                }
-                            }
-                        }
+                    }
+                }
             }
         }
 
     }
-}
-return retorno;
+
 }
 
-int salarioEmpleados(eEmployee* listE,int lenE,eSector* listS,int lenS)
+void salarioEmpleados(eEmployee* listE,int lenE,eSector* listS,int lenS)
 {
     int i;
     float totalSalario;
     int totalEmpleados;
     float promedioSalario;
-    int retorno=-1;
-    if(listE!=NULL && lenE!=0)
-    {
-        retorno=0;
-        totalSalario = salarioAcumEmpleados(listE, lenE);
-        totalEmpleados=cantidadEmpleados(listE,lenE);
-        promedioSalario = totalSalario / totalEmpleados;
 
-        printf("\nEl salario promedio es: %.2f\n", promedioSalario);
-        printf("Los empleados que lo superan el salario promedio son: \n\n");
-        for (i=0; i<lenE; i++)
+    totalSalario = salarioAcumEmpleados(listE, lenE);
+    totalEmpleados=cantidadEmpleados(listE,lenE);
+    promedioSalario = totalSalario / totalEmpleados;
+
+    printf("\nEl salario promedio es: %.2f\n", promedioSalario);
+    printf("Los empleados que lo superan el salario promedio son: \n\n");
+    for (i=0; i<lenE; i++)
+    {
+        if (listE[i].salary > promedioSalario && listE[i].isEmpty == FALSE)
         {
-            if (listE[i].salary > promedioSalario && listE[i].isEmpty == FALSE)
-            {
-                printf("%s %s\n\n",listE[i].name, listE[i].lastName);
-            }
+            printf("%s %s\n\n",listE[i].name, listE[i].lastName);
         }
     }
-return retorno;
 }
 
 float salarioAcumEmpleados (eEmployee* listE, int lenE)

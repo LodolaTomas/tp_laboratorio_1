@@ -5,14 +5,14 @@
 typedef struct
 {
 
- int id;
- char name[51];
- char lastName[51];
- float salary;
- int sector;
- int isEmpty;
+    int id;
+    char name[51];
+    char lastName[51];
+    float salary;
+    int sector;
+    int isEmpty;
 
-}eEmployee;
+} eEmployee;
 
 /** \brief To indicate that all position in the array are empty,
  *              this function put the flag (isEmpty) in TRUE in all
@@ -43,7 +43,7 @@ int addEmployee(eEmployee* listE, int lenEmployee, eSector* listS, int lenSector
  * \param len int
  * \param id int
  * \return int Return (-1) if Error [Invalid length or NULL pointer or if can't
-find a employee] - (0) if Ok
+find employees] - (0) if Ok
  *
  */
 int removeEmployee(eEmployee* listE, int lenEmployee,eSector* listS, int lenSector);
@@ -65,10 +65,10 @@ indicate UP or DOWN order
  * \param list Employee*
  * \param len int
  * \param order int [1] indicate UP - [0] indicate DOWN
- * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+ * \return void --
  *
  */
-int sortEmployees(eEmployee* listE, int lenEmployee, int order);
+void sortEmployees(eEmployee* listE, int lenEmployee, int order);
 
 /** \brief print the content of employees array
  *
@@ -113,7 +113,7 @@ void hardcodearEmployees(eEmployee* listE, int lenEmployee,int* id);
   * \param listS Sector*
  * \param lenSector int
  * \return int Return (-1) if Error [Invalid length or NULL pointer or if can't
-find free space] - (0) if Ok - (1) if Cancel modify
+find employees] - (0) if Ok - (1) if Cancel modify
  *
  */
 int modifyEmployees(eEmployee* listE, int lenEmployee,eSector* listS,int lenSector);
@@ -125,10 +125,11 @@ el total y promedio de salarios
  * \param lenEmployee int
   * \param listS Sector*
  * \param lenSector int
- * \return void --
+ * \return int Return (-1) if Error [Invalid length or NULL pointer or if can't
+find employees] - (0) if Ok
  *
  */
-void infoEmployees(eEmployee* listE, int lenEmployee,eSector* listS,int lenSector);
+int infoEmployees(eEmployee* listE, int lenEmployee,eSector* listS,int lenSector);
 
 /** \brief Acumula el salario de los empleados y devuelve los salarios de los empleados cargados
  *
@@ -154,10 +155,10 @@ int cantidadEmpleados(eEmployee* listE,int lenE);
  * \param lenE int
   * \param listS Sector*
  * \param lenSr int
- * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+ * \return void --
  *
  */
-int salarioEmpleados(eEmployee* listE,int lenE,eSector* listS,int lenS);
+void salarioEmpleados(eEmployee* listE,int lenE,eSector* listS,int lenS);
 
 
 void mostrar(char mensaje[],eEmployee employee,eSector sector);
