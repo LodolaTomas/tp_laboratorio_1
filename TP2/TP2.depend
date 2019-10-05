@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1570241706 source:/home/tomas/Escritorio/TP2/main.c
+	"ArrayEmployees.h"
+
+1570241706 source:/home/tomas/Escritorio/TP2/ArrayEmployees.c
+	"ArrayEmployees.h"
+
+1570242233 /home/tomas/Escritorio/TP2/ArrayEmployees.h
+	"ArraySector.h"
+
+1570241706 source:/home/tomas/Escritorio/TP2/inputs.c
+	"inputs.h"
+
+1570241706 /home/tomas/Escritorio/TP2/inputs.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<time.h>
+
+1570040743 source:/home/tomas/Escritorio/TP2/myFunctions.c
+	"myFunctions.h"
+
+1570040743 /home/tomas/Escritorio/TP2/myFunctions.h
+	<stdio.h>
+	<stdlib.h>
+	"inputs.h"
+	"ArrayEmployees.h"
+
+1570116334 source:/home/tomas/Escritorio/TP2/ArraySector.c
+	"ArraySector.h"
+
+1570201692 /home/tomas/Escritorio/TP2/ArraySector.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"inputs.h"
+
