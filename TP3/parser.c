@@ -9,7 +9,7 @@
  */
 int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
 {
-    int state=-1;
+    int state=1;// si pFile o pArrayListEmployee son NULL
     int counter=0;//Cuento los empleados que son leidos y agregados a la Lista
     Employee* this=NULL;
     char idStr[20];
@@ -44,7 +44,7 @@ int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
  */
 int parser_EmployeeFromBinary(FILE* pFile, LinkedList* pArrayListEmployee)
 {
-    int state=-1;
+    int state=1;//1 si pArrayListEmployee o pFIle son NULL
     Employee* this;
     int counter=0;
     if(pFile!=NULL && pArrayListEmployee!=NULL)//Verifico que no sea NULL
@@ -55,6 +55,10 @@ int parser_EmployeeFromBinary(FILE* pFile, LinkedList* pArrayListEmployee)
             if(this!=NULL)
             {
                 fread(this,sizeof(Employee),1,pFile);//guardo en el aux lo de tipo FILE
+                if(feof(pFile))
+                {
+                    break;
+                }
                 ll_add(pArrayListEmployee,this);//lo agrego la linkedList
                 counter++;
             }

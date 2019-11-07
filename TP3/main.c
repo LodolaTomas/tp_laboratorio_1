@@ -2,27 +2,34 @@
 #include <stdlib.h>
 #include "Controller.h"
 
-/****************************************************
-    Menu:
-     1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).***LISTO
-     2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).***LISTO
-     3. Alta de empleado***LISTO
-     4. Modificar datos de empleado***LISTO
-     5. Baja de empleado***LISTO
-     6. Listar empleados***LISTO
-     7. Ordenar empleados***LISTO
-     8. Guardar los datos de los empleados en el archivo data.csv (modo texto).***LISTO
-     9. Guardar los datos de los empleados en el archivo data.csv (modo binario).***LISTO
-    10. Salir
-*****************************************************/
+/**                 IMPORTANTE
 
+        settings/Environment.../Terminal to lunch console programs
+
+        yo no utilizo la terminal del codeBlocks[xterm -T $TITLE -e]
+        utilizo la terminal base del Linux[gnome-terminal -t $TITLE -x ]
+        no cambia mucho pero al realizar el listado de empleados, muestra toda la lista
+        sin la necesidad de tener que mostrar de a 250 empleados
+
+        Aun asi voy a commitiar en la funcion Controller_ListEmployee
+        para que el listado se vea de a cada 150 empleados.
+*/
+
+
+/*                                                      Que hace la variable flag?
+La variable flag se encarga de INutilizar las opciones [3-9], si es que no se realizo la carga de empleados[.txt o .bin].
+Una vez relizada la carga de empleados [.txt o .bin], flag INutiliza cualquier otra carga de empleados para que no se
+vuelva a cargar en el arrayList.
+Una vez guardado los datos de los empleados[.txt o .bin] (que realizan un ll_clear), cambia el estado de la variable flag
+para que se pueda realizar otra carga de empleados[.txt o .bin].
+*/
 
 int main()
 {
     int opcion;
     int respuesta;
     int flag=0;
-    LinkedList* listaEmpleados = ll_newLinkedList();
+    LinkedList* listaEmpleados = ll_newLinkedList();;
     int id;
 
     do
@@ -33,21 +40,49 @@ int main()
         {
         case 1:
             borrar();
-            if(controller_loadFromText("data.csv",listaEmpleados)==0)
+            if(flag==0)
             {
-                flag=1;
-                printf("Cargado exitosamente en Texto\n");
-                controller_GetLastId(listaEmpleados,&id);
+                respuesta=controller_loadFromText("data.csv",listaEmpleados);
+                switch(respuesta)
+                {
+                case 0:
+                    flag=1;
+                    printf("Cargado exitosamente en Texto\n");
+                    controller_GetLastId(listaEmpleados,&id);
+                    break;
+                case 1:
+                    borrar();
+                    printf("pFile no pudo ser abierto o ListaEmpleado es NULL\n");
+                    break;
+                }
+            }
+            else{
+                printf("Un archivo ya ha sido Abierto\n");
+                printf("Por favor, guarde el archivo para poder realizar otra carga\n");
             }
             pausa();
             break;
         case 2:
             borrar();
-            if(controller_loadFromBinary("data.bin",listaEmpleados)==0)
+            if(flag==0)
             {
-                flag=1;
-                printf("Cargado exitosamente en Binario\n");
-                controller_GetLastId(listaEmpleados,&id);
+                respuesta=controller_loadFromBinary("data.bin",listaEmpleados);
+                switch(respuesta)
+                {
+                case 0:
+                    flag=1;
+                    printf("Cargado exitosamente en Binario\n");
+                    controller_GetLastId(listaEmpleados,&id);
+                    break;
+                case 1:
+                    borrar();
+                    printf("pFile no pudo ser abierto o ListaEmpleado es NULL\n");
+                    break;
+                }
+            }
+            else{
+                printf("Un archivo ya ha sido Abierto\n");
+                printf("Por favor, guarde el archivo para poder realizar otra carga\n");
             }
             pausa();
             break;
@@ -177,7 +212,8 @@ int main()
                 if(controller_saveAsText("data.csv",listaEmpleados)==0)
                 {
                     printf("Ha sido guardado Exitosamente\n");
-                    pausa();
+                    ll_clear(listaEmpleados);
+                    flag=0;
                 }
             }
             else
@@ -193,7 +229,8 @@ int main()
                 if(controller_saveAsBinary("data.bin",listaEmpleados)==0)
                 {
                     printf("Ha sido guardado Exitosamente\n");
-                    pausa();
+                    ll_clear(listaEmpleados);
+                    flag=0;
                 }
             }
             else

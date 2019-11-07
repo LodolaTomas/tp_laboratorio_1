@@ -133,3 +133,47 @@
 	<stdlib.h>
 	"Controller.h"
 
+1573167474 source:/home/tomas/Escritorio/progLabo1/tp_laboratorio_1/TP3/Controller.c
+	"Controller.h"
+
+1573163007 /home/tomas/Escritorio/progLabo1/tp_laboratorio_1/TP3/Controller.h
+	<stdio.h>
+	<stdlib.h>
+	"parser.h"
+
+1573163007 /home/tomas/Escritorio/progLabo1/tp_laboratorio_1/TP3/parser.h
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+
+1573163007 /home/tomas/Escritorio/progLabo1/tp_laboratorio_1/TP3/LinkedList.h
+
+1573163007 /home/tomas/Escritorio/progLabo1/tp_laboratorio_1/TP3/Employee.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"inputs.h"
+
+1573163007 /home/tomas/Escritorio/progLabo1/tp_laboratorio_1/TP3/inputs.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<unistd.h>
+	<time.h>
+
+1573163007 source:/home/tomas/Escritorio/progLabo1/tp_laboratorio_1/TP3/Employee.c
+	"Employee.h"
+
+1573163007 source:/home/tomas/Escritorio/progLabo1/tp_laboratorio_1/TP3/inputs.c
+	"inputs.h"
+
+1573167635 source:/home/tomas/Escritorio/progLabo1/tp_laboratorio_1/TP3/main.c
+	<stdio.h>
+	<stdlib.h>
+	"Controller.h"
+
+1573164853 source:/home/tomas/Escritorio/progLabo1/tp_laboratorio_1/TP3/parser.c
+	"parser.h"
+

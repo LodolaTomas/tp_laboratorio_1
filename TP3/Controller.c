@@ -13,7 +13,7 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
     int state=1;//1 sino pudo abrir el archivo
     FILE* pArchive=fopen(path,"r");
 
-    if(pArchive!=NULL)
+    if(pArchive!=NULL && pArrayListEmployee!=NULL)
     {
         state=parser_EmployeeFromText(pArchive,pArrayListEmployee);//=-1 si pArrayList es NULL
         //=0 si fue exitoso
@@ -30,7 +30,7 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
  */
 int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
 {
-    int state=-1;
+    int state=1;//1 si el archivo no pudo ser abierto
     FILE* pArchivo=fopen(path,"rb");
 
     if(pArchivo!=NULL && pArrayListEmployee!=NULL)
@@ -167,6 +167,12 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
         {
             this=(Employee*)ll_get(pArrayListEmployee,i);//Obtengo un Empleado segun id y lo muestro
             employee_ShowOneEmployee(this);
+            /*
+            if(i!=0 && i%150==0)
+            {
+                    pausa();
+            }
+            */
         }
         printf("**************************************************************************************\n");
         state=0;
@@ -273,6 +279,7 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
     char nombre[50];
     int horasTrabajadas;
     int salario;
+    int counter=0;
 
     if(pArchivo!=NULL && pArrayListEmployee!=NULL)
     {
@@ -286,9 +293,11 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
             employee_getHorasTrabajadas(this,&horasTrabajadas);
             employee_getSueldo(this,&salario);
             fprintf(pArchivo,"%d,%s,%d,%d\n",id,nombre,horasTrabajadas,salario);
+            counter++;
         }
         state=0;
         fclose(pArchivo);
+        printf("Fueron guardados: %d\n",counter);//idea de passu
     }
     return state;
 }
@@ -306,6 +315,7 @@ int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
     int i;
     int len;
     Employee* this=NULL;
+    int counter=0;
     FILE* pArchivo=fopen(path,"wb");//abro el archivo en modo write binary
 
     if(pArchivo!=NULL && pArrayListEmployee!=NULL)//Verifico que nada sea NULL
@@ -315,9 +325,11 @@ int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
         {
             this=(Employee*)ll_get(pArrayListEmployee,i);//obtengo el empleado en la posicion i
             fwrite(this,sizeof(Employee),1,pArchivo);//y lo escribo en el archivo
+            counter++;
         }
-        fclose(pArchivo);//Cierro el archivo
         state=0;
+        printf("Fueron Guardados: %d\n",counter);//idea de passu
+        fclose(pArchivo);//Cierro el archivo
     }
 
     return state;
