@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include "Controller.h"
 
-/**                 IMPORTANTE
+/*                                         IMPORTANTE
 
         settings/Environment.../Terminal to lunch console programs
 
         yo no utilizo la terminal del codeBlocks[xterm -T $TITLE -e]
         utilizo la terminal base del Linux[gnome-terminal -t $TITLE -x ]
         no cambia mucho pero al realizar el listado de empleados, muestra toda la lista
-        sin la necesidad de tener que mostrar de a 250 empleados
+        sin la necesidad de tener que mostrar de a 150 empleados
 
         Aun asi voy a commitiar en la funcion Controller_ListEmployee
         para que el listado se vea de a cada 150 empleados.

@@ -176,15 +176,19 @@ void employee_showEmployee(Employee oneEmployee)
 
 int employee_compareById(void* pElementOne, void* pElementTwo)
 {
-    int state = 1;
+    int state = -1;
     Employee* auxEmp1 = (Employee*) pElementOne;
     Employee* auxEmp2 = (Employee*) pElementTwo;
+    int id;
+    int id2;
+    employee_getId(auxEmp1,&id);
+    employee_getId(auxEmp2,&id2);
 
-    if (auxEmp1->id < auxEmp2->id)
+    if (id > id2)
     {
-        state = -1;
+        state = 1;
     }
-    else if (auxEmp1->id == auxEmp2->id)
+    else if (id == id2)
     {
         state = 0;
     }
@@ -224,9 +228,9 @@ int employee_compareByHoursWorked(void* pElementOne, void* pElementTwo)
     employee_getHorasTrabajadas(oneEmployee,&oneHoursWorked);
     employee_getHorasTrabajadas(twoEmployee,&twoHoursWorked);
 
-    if(oneHoursWorked<twoHoursWorked)
+    if(oneHoursWorked>twoHoursWorked)
     {
-        retorno=-1;
+        retorno=1;
     }
     else if(oneHoursWorked==twoHoursWorked)
     {
@@ -238,7 +242,7 @@ int employee_compareByHoursWorked(void* pElementOne, void* pElementTwo)
 
 int employee_compareBySalary(void* pElementOne, void* pElementTwo)
 {
-    int retorno=1;
+    int retorno=-1;
     int oneSalary;
     int twoSalary;
     Employee* oneEmployee=(Employee*)pElementOne;
@@ -246,9 +250,9 @@ int employee_compareBySalary(void* pElementOne, void* pElementTwo)
     employee_getSueldo(oneEmployee,&oneSalary);
     employee_getSueldo(twoEmployee,&twoSalary);
 
-    if(oneSalary<twoSalary)
+    if(oneSalary>twoSalary)
     {
-        retorno=-1;
+        retorno=1;
     }
     else if(oneSalary==twoSalary)
     {

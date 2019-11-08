@@ -127,7 +127,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
         answer=controller_FindId(pArrayListEmployee);
         if(answer!=-1)
         {
-            state=1;
+            state=1;//1 si el empleado no se borro
             this=(Employee*)ll_get(pArrayListEmployee,answer);
             borrar();
             printf("**************************************************************************************\n");
@@ -135,7 +135,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
             printf("**************************************************************************************\n");
             if(verifyConformity("Esta seguro de Borrar este Empleado?[Si/No]: ","Error, [Si/No]")==1)
             {
-                state=2;
+                state=2;//2 si el empleado se borro
                 ll_remove(pArrayListEmployee,answer);
             }
         }
@@ -191,7 +191,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    int state=-1;
+    int state=-1;//-1 si pArrayListEmployee es NULL
     int opcion;
     int orden;
     if(pArrayListEmployee!=NULL)
@@ -217,7 +217,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
                 break;
             case 2:
                 borrar();
-                getValidInt("1. Ascendente\n2. Descendente\nElija una opcion: ","Error, Solo numeros",1,2,&orden);
+                getValidInt("1. Descendente\n2. Ascendente\nElija una opcion: ","Error, Solo numeros",1,2,&orden);
                 borrar();
                 printf("Aguarde un Momento\n");
                 if(ll_sort(pArrayListEmployee2,employee_compareByName,orden-1)==0)
@@ -255,7 +255,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
             borrar();
         }
         while(opcion!=5);
-        state=0;
+        state=0;//si el ordenado se realizo con exito
     }
     return state;
 }
@@ -362,7 +362,7 @@ void controller_GetLastId(LinkedList* pArrayListEmployee,int* id)
 
 int controller_FindId(LinkedList* pArrayListEmployee)
 {
-    int retorno=-1;
+    int retorno=-1;//-1 si el empleado no fue encontrado en la lista
     int opcion;
     int len;
     int i;
@@ -380,11 +380,10 @@ int controller_FindId(LinkedList* pArrayListEmployee)
             employee_getId(this,&idAux);
             if(opcion==idAux)
             {
-                retorno=i;
+                retorno=i;//si el empleado fue encontrado
                 break;
             }
         }
-
     }
     return retorno;
 }

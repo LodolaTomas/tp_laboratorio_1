@@ -167,6 +167,14 @@ void stringToUpper (char[]);
  */
 void stringToLower (char[]);
 
+/**
+ * \brief Solicita un string y valida que sea solo letras y que pueda contener espacios
+ * \param requestMessage Es el mensaje a ser mostrado para solicitar el dato
+ * \param requestMessage Es el mensaje a ser mostrado en caso de error
+ * \param input Array donde se cargará el texto ingresado
+ * \return -
+ *
+ */
 void getValidName(char requestMessage[],char errorMessage[],int lowLimit, int hiLimit, char* input);
 
 /**
@@ -177,8 +185,21 @@ void getValidName(char requestMessage[],char errorMessage[],int lowLimit, int hi
  */
 void cleanStdin(void);
 
+/**
+ * \brief Solicita un string || verifica que el sexo ingresado sea correcto
+ * \param char* letter array donde se cagara el sexo ingresado
+ * \return -
+ *
+ */
 void getValidSex(char* letter);
 
+/**
+ * \brief Solicita un string
+ * \param requestMessage Es el mensaje a ser mostrado para solicitar el dato
+ * \param requestMessage Es el mensaje a ser mostrado en caso de error
+ * \return [1] si la respuesta fue SI, [-1] si fue otra respuesta
+ *
+ */
 int verifyConformity (char message[], char cancelMessage[]);
 
 void borrar();
